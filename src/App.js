@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Tabs from './components/Tabs';
-import AddressBar from './components/AddressBar';
 import './App.css';
+import AddressBar from './components/AddressBar';
 
 export default function App() {
   const [browsers, setBrowsers] = useState([
@@ -21,6 +21,12 @@ export default function App() {
 
   }
 
+  function updateBrowser(url){
+    const newBrowsers = [...browsers]
+    newBrowsers[activeBrowser] = url
+    setBrowsers(newBrowsers)
+  }
+
   const url = browsers[activeBrowser]
 
   return (
@@ -30,7 +36,7 @@ export default function App() {
           choose={chooseBrowser} add={addBrowser}
         />
 
-        <AddressBar />
+        <AddressBar update={updateBrowser} url={url} />
 
         <div className="viewport">
           {url ? (
